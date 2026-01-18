@@ -22,7 +22,7 @@
       property="og:description"
       content="Calculadora web simple: suma, resta, multiplicación y división. Creada con HTML, CSS y JavaScript."
     />
-    <meta property="og:image" content="./src/icon.png" />
+    <meta property="og:image" content="./icon.png" />
     <meta
       property="og:image:alt"
       content="Una icono de una calculadora android"
@@ -30,15 +30,15 @@
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="300" />
     <meta property="og:type" content="image.png" />
-    <meta property="og:url" content="./src/icon.png" />
+    <meta property="og:url" content="./icon.png" />
 
     <meta property="og:locale:alternate" content="es_ES" />
     <meta property="og:site_name" content="Calculadora Basica" />
 
     <link rel="canonical" href="https://basic-calculator-xgn4.onrender.com/"/>
-    <link rel="icon" href="./src/icon.png" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <title>Calculadora basica | Hecha en HTML, CSS, JS</title>
+    <link rel="icon" href="./icon.png" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Calculadora basica | HTML, CSS, JS</title>
   </head>
   <body>
     <header>
@@ -75,52 +75,6 @@
       </article>
     </header>
 
-    <script>
-      let calculator = document.getElementById("calculator");
-      let submit = document.querySelector(".submit");
-      let result = document.querySelector(".result");
-      let nums = document.querySelectorAll(".num");
-      let reset = document.querySelector(".reset");
-      let calc = document.querySelector(".calc");
-
-      nums.forEach(function (num) {
-        num.addEventListener("click", function (e) {
-          let operation = result.value;
-          let element = e.target.value;
-
-          if (!operation) {
-            if (element === "-" || !isNaN(element)) {
-              result.value = operation + element;
-            } else {
-              result.value = "";
-            }
-          } else {
-            if (!isNaN(element)) {
-              result.value = operation + element;
-            } else {
-              let list_numbers = operation.split("");
-              if (
-                list_numbers[list_numbers.length - 1] === "/" ||
-                list_numbers[list_numbers.length - 1] === "+" ||
-                list_numbers[list_numbers.length - 1] === "-" ||
-                list_numbers[list_numbers.length - 1] === "*"
-              ) {
-                result.value = operation;
-              } else {
-                result.value = operation + element;
-              }
-            }
-          }
-        });
-      });
-
-      calc.addEventListener("click", function (e) {
-        result.value = eval(result.value);
-      });
-
-      reset.addEventListener("click", function () {
-        result.value = "";
-      });
-    </script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-family-text: 'Inter', sans-serif;
+  --font-family-display: 'Kalam', cursive;
+  --line-height: 1.5;
+  --font-weight: 400;
+  --color-text: rgba(255, 255, 255, 0.95);
+  --background-color-main: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --background-color-calculator: #1a1a1a;
+  --background-color-button: #2d2d2d;
+  --background-color-button-hover: #3a3a3a;
+  --color-operator: #ff9500;
+  --color-operator-hover: #ffad33;
+  --color-action: #a6a6a6;
+  --color-action-hover: #d4d4d4;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-text);
+  overflow: hidden;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: var(--background-color-main);
+  position: relative;
+  overflow: hidden;
+}
+
+#container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 94%;
+  max-width: 420px;
+  height: 580px;
+  background: var(--background-color-calculator);
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 30px;
+  padding: 25px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+.result {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  color: var(--color-text);
+  background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+  padding: 30px 20px;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 48px;
+  font-family: var(--font-family-display);
+  text-align: right;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 
+              0 2px 4px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+}
+
+.result:focus {
+  border-color: rgba(255, 149, 0, 0.5);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 
+              0 0 0 3px rgba(255, 149, 0, 0.1);
+}
+
+.container_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+input[type="button"] {
+  width: 100%;
+  height: 70px;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-family-text);
+  position: relative;
+  overflow: hidden;
+}
+
+input[type="button"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+input[type="button"]:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+input[type="button"]:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-sm);
+}
+
+.num {
+  background: linear-gradient(135deg, var(--background-color-button) 0%, #252525 100%);
+  font-size: 24px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.num:hover {
+  background: linear-gradient(135deg, var(--background-color-button-hover) 0%, #333 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.operators {
+  background: linear-gradient(135deg, var(--color-operator) 0%, #e68900 100%);
+  color: white;
+  font-size: 28px;
+  transition: all 0.2s ease;
+  font-weight: 700;
+}
+
+.operators:hover {
+  background: linear-gradient(135deg, var(--color-operator-hover) 0%, #ff9900 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 149, 0, 0.4);
+}
+
+.reset {
+  background: linear-gradient(135deg, var(--color-action) 0%, #8c8c8c 100%);
+  color: #1a1a1a;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  font-weight: 700;
+}
+
+.reset:hover {
+  background: linear-gradient(135deg, var(--color-action-hover) 0%, #b8b8b8 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.calc {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  color: white;
+  font-size: 28px;
+  transition: all 0.2s ease;
+  font-weight: 700;
+}
+
+.calc:hover {
+  background: linear-gradient(135deg, #5ba0f2 0%, #4580cd 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
+}
+
+@media screen and (min-width: 500px) and (max-width: 850px) {
+  #calculator {
+    height: 570px;
+    padding: 30px 25px;
+  }
+
+  input[type="button"] {
+    height: 75px;
+    font-size: 22px;
+  }
+
+  .result {
+    font-size: 44px;
+    padding: 35px 25px;
+  }
+
+  .operators {
+    font-size: 26px;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  #calculator {
+    height: 620px;
+    padding: 35px 30px;
+    max-width: 450px;
+  }
+
+  input[type="button"] {
+    height: 80px;
+    font-size: 26px;
+  }
+
+  .result {
+    font-size: 52px;
+    padding: 40px 30px;
+  }
+
+  .operators {
+    font-size: 30px;
+  }
+
+  .num {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #calculator {
+    height: 550px;
+    padding: 20px 15px;
+  }
+
+  input[type="button"] {
+    height: 65px;
+    font-size: 20px;
+  }
+
+  .result {
+    font-size: 40px;
+    padding: 25px 15px;
+  }
+
+  .operators {
+    font-size: 24px;
+  }
+}
